@@ -1,6 +1,8 @@
 // Copyright 1998-2015 Epic Games, Inc. All Rights Reserved.
 #pragma once
 #include "GameFramework/Character.h"
+#include "Item.h"
+#include "Weapon.h"
 #include "RE3MakeCharacter.generated.h"
 
 UCLASS(config=Game)
@@ -25,6 +27,12 @@ public:
 	/** Base look up/down rate, in deg/sec. Other scaling may affect final rate. */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera)
 	float BaseLookUpRate;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Inventory)
+	TArray<AItem*> InventoryArray;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Inventory)
+	AWeapon *CurrentWeapon;
 
 protected:
 
