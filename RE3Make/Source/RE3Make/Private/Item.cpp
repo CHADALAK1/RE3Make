@@ -31,6 +31,7 @@ void AItem::Tick( float DeltaTime )
 void AItem::Pickup()
 {
 	SetActorHiddenInGame(true);
+	GetCollisionComp()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 }
 
 void AItem::Drop()

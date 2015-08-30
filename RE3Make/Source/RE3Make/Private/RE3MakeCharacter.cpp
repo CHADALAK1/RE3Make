@@ -11,6 +11,8 @@ ARE3MakeCharacter::ARE3MakeCharacter(const FObjectInitializer& ObjectInitializer
 	// Set size for collision capsule
 	GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);
 
+	InventoryArray.SetNum(8);
+
 	CollisionComp = ObjectInitializer.CreateDefaultSubobject<UBoxComponent>(this, TEXT("CollisionComp"));
 	CollisionComp->AttachTo(RootComponent);
 	CollisionComp->OnComponentBeginOverlap.AddDynamic(this, &ARE3MakeCharacter::OnCollisionEnter);
@@ -44,6 +46,7 @@ void ARE3MakeCharacter::SetupPlayerInputComponent(class UInputComponent* InputCo
 	check(InputComponent);
 	InputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
 	InputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
+	InputComponent->BindAction("Action", IE_Pressed, this, &ARE3MakeCharacter::Action);
 
 	InputComponent->BindAxis("MoveForward", this, &ARE3MakeCharacter::MoveForward);
 	InputComponent->BindAxis("MoveRight", this, &ARE3MakeCharacter::MoveRight);
@@ -59,7 +62,18 @@ void ARE3MakeCharacter::SetupPlayerInputComponent(class UInputComponent* InputCo
 
 void ARE3MakeCharacter::Action()
 {
-
+	if (bCanPickup)
+	{
+		for (int32 i = 0; i < InventoryArray.Num(); i++)
+		{
+			if (InventoryArray[i] == NULL)
+			{
+				InventoryArray[i] = CollidedItem;
+				CollidedItem->Pickup();
+				break;
+			}
+		}
+	}
 }
 
 void ARE3MakeCharacter::OnCollisionEnter(AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bSweep, const FHitResult &SweepResult)
