@@ -4,8 +4,10 @@
 #include "KeyItem.h"
 
 
-AKeyItem::AKeyItem()
+AKeyItem::AKeyItem(const FObjectInitializer& ObjectInitializer)
+: Super(ObjectInitializer)
 {
+	Mesh = ObjectInitializer.CreateDefaultSubobject<UStaticMeshComponent>(this, TEXT("Mesh"));
 	Mesh->AttachTo(RootComponent);
 }
 

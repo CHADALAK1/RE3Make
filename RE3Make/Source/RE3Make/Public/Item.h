@@ -5,6 +5,13 @@
 #include "GameFramework/Actor.h"
 #include "Item.generated.h"
 
+UENUM(BlueprintType)
+enum EItemType
+{
+	E_Consumable	UMETA(DisplayName = "Consumable"),
+	E_Weapon		UMETA(DisplayName = "Weapon"),
+	E_KeyItem		UMETA(DisplayName = "KeyItem")
+};
 
 UCLASS()
 class RE3MAKE_API AItem : public AActor
@@ -16,13 +23,16 @@ class RE3MAKE_API AItem : public AActor
 	
 public:	
 	// Sets default values for this actor's properties
-	AItem();
+	AItem(const FObjectInitializer& ObjectInitializer);
 
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 	
 	// Called every frame
 	virtual void Tick( float DeltaSeconds ) override;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = ItemType)
+	TEnumAsByte<EItemType> TypeItem;
 
 	virtual void Pickup();
 	virtual void Drop();

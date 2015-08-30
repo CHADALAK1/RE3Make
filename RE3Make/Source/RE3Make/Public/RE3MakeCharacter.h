@@ -10,15 +10,11 @@ class ARE3MakeCharacter : public ACharacter
 {
 	GENERATED_BODY()
 
-	/** Camera boom positioning the camera behind the character */
-	//UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
-	//class USpringArmComponent* CameraBoom;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Collision, meta = (AllowPrivateAccess = "true"))
+	class UBoxComponent *CollisionComp;
 
-	/** Follow camera */
-	//UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
-	//class UCameraComponent* FollowCamera;
 public:
-	ARE3MakeCharacter();
+	ARE3MakeCharacter(const FObjectInitializer& ObjectInitializer);
 
 	/** Base turn rate, in deg/sec. Other scaling may affect final turn rate. */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera)
@@ -32,6 +28,9 @@ public:
 	TArray<AItem*> InventoryArray;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Inventory)
+	AItem *CollidedItem;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Inventory)
 	AWeapon *CurrentWeapon;
 
 protected:
@@ -41,6 +40,8 @@ protected:
 
 	/** Called for side to side input */
 	void MoveRight(float Value);
+
+	bool bCanPickup;
 
 	/** 
 	 * Called via input to turn at a given rate. 
@@ -54,11 +55,13 @@ protected:
 	 */
 	void LookUpAtRate(float Rate);
 
-	/** Handler for when a touch input begins. */
-	void TouchStarted(ETouchIndex::Type FingerIndex, FVector Location);
+	void Action();
 
-	/** Handler for when a touch input stops. */
-	void TouchStopped(ETouchIndex::Type FingerIndex, FVector Location);
+	UFUNCTION()
+	void OnCollisionEnter(AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bSweep, const FHitResult &SweepResult);
+
+	UFUNCTION()
+	void OnCollisionExit(AActor* OtherActor, UPrimitiveComponent *OtherComp, int32 OtherBodyIndex);
 
 protected:
 	// APawn interface
@@ -66,9 +69,7 @@ protected:
 	// End of APawn interface
 
 public:
-	/** Returns CameraBoom subobject **/
-	//FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
-	/** Returns FollowCamera subobject **/
-	//FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
+
+	FORCEINLINE class UBoxComponent *GetCollisionComp() const { return CollisionComp; }
 };
 

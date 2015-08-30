@@ -18,7 +18,7 @@ class RE3MAKE_API AKeyItem : public AItem
 
 public:
 
-	AKeyItem();
+	AKeyItem(const FObjectInitializer& ObjectInitializer);
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Name)
 	FName KeyName;

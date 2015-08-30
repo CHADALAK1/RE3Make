@@ -17,7 +17,7 @@ class RE3MAKE_API AWeapon : public AItem
 	class USkeletalMeshComponent *Mesh;
 	
 public:
-	AWeapon();
+	AWeapon(const FObjectInitializer& ObjectInitializer);
 
 	FORCEINLINE class USkeletalMeshComponent *GetMesh() const { return Mesh; }
 	

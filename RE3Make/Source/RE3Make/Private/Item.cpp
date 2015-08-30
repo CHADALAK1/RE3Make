@@ -5,11 +5,11 @@
 
 
 // Sets default values
-AItem::AItem()
+AItem::AItem(const FObjectInitializer& ObjectInitializer)
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-
+	CollisionComp = ObjectInitializer.CreateDefaultSubobject<UBoxComponent>(this, TEXT("CollisionComp"));
 	RootComponent = CollisionComp;
 
 }
@@ -30,11 +30,11 @@ void AItem::Tick( float DeltaTime )
 
 void AItem::Pickup()
 {
-
+	SetActorHiddenInGame(true);
 }
 
 void AItem::Drop()
 {
-
+	SetActorHiddenInGame(false);
 }
 
