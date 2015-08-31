@@ -13,6 +13,22 @@ enum EItemType
 	E_KeyItem		UMETA(DisplayName = "KeyItem")
 };
 
+USTRUCT(BlueprintType)
+struct FItemStruct
+{
+
+	GENERATED_USTRUCT_BODY()
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Config)
+	/** Splash art for the UI */
+	UTexture2D* SplashArt;
+
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Config)
+		/** Name of the weapon */
+	FString Name;
+};
+
 UCLASS()
 class RE3MAKE_API AItem : public AActor
 {
@@ -24,6 +40,10 @@ class RE3MAKE_API AItem : public AActor
 public:	
 	// Sets default values for this actor's properties
 	AItem(const FObjectInitializer& ObjectInitializer);
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Config)
+		/** Weapon Configuration Struct object */
+	FItemStruct ItemStruct;
 
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
