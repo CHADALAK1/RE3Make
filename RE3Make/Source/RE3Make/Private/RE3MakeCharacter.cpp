@@ -47,6 +47,8 @@ void ARE3MakeCharacter::SetupPlayerInputComponent(class UInputComponent* InputCo
 	InputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
 	InputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
 	InputComponent->BindAction("Action", IE_Pressed, this, &ARE3MakeCharacter::Action);
+	InputComponent->BindAction("Aim", IE_Pressed, this, &ARE3MakeCharacter::Aim);
+	InputComponent->BindAction("Aim", IE_Released, this, &ARE3MakeCharacter::Aim);
 
 	InputComponent->BindAxis("MoveForward", this, &ARE3MakeCharacter::MoveForward);
 	InputComponent->BindAxis("MoveRight", this, &ARE3MakeCharacter::MoveRight);
@@ -73,6 +75,18 @@ void ARE3MakeCharacter::Action()
 				break;
 			}
 		}
+	}
+}
+
+void ARE3MakeCharacter::Aim()
+{
+	if (!bIsAiming)
+	{
+		bIsAiming = true;
+	}
+	else
+	{
+		bIsAiming = false;
 	}
 }
 
@@ -117,7 +131,7 @@ void ARE3MakeCharacter::LookUpAtRate(float Rate)
 
 void ARE3MakeCharacter::MoveForward(float Value)
 {
-	if ((Controller != NULL) && (Value != 0.0f))
+	if ((Controller != NULL) && (Value != 0.0f) && (!bIsAiming))
 	{
 		// find out which way is forward
 		const FRotator Rotation = Controller->GetControlRotation();

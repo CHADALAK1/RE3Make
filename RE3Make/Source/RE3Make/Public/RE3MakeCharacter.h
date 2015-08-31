@@ -41,7 +41,11 @@ protected:
 	/** Called for side to side input */
 	void MoveRight(float Value);
 
+	/** Checks to see if the player can pickup an item*/
 	bool bCanPickup;
+
+	/** Checks to see if the player is aiming*/
+	bool bIsAiming;
 
 	/** 
 	 * Called via input to turn at a given rate. 
@@ -55,7 +59,11 @@ protected:
 	 */
 	void LookUpAtRate(float Rate);
 
+	/** Does all of the necessary things to pickup, climb, fire, and interact */
 	void Action();
+
+	/** Aims the weapon*/
+	void Aim();
 
 	UFUNCTION()
 	void OnCollisionEnter(AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bSweep, const FHitResult &SweepResult);
