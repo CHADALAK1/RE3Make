@@ -33,6 +33,9 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Inventory)
 	AWeapon *CurrentWeapon;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Animation)
+	bool bIsPickingUp;
+
 protected:
 
 	/** Called for forwards/backward input */
