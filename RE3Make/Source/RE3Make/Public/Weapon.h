@@ -92,21 +92,21 @@ public:
 
 	UPROPERTY(EditDefaultsOnly, Category = Config)
 		/** Fire Sound for weapon */
-	USoundCue* FireSound;
+	class USoundCue* FireSound;
 
 	UPROPERTY(EditDefaultsOnly, Category = Config)
 		/** Reload Start Sound for weapon */
-	USoundCue* ReloadStartSound;
+	class USoundCue* ReloadStartSound;
 
 
 	UPROPERTY(EditDefaultsOnly, Category = Config)
 		/** Reload Finish Sound for weapon */
-	USoundCue* ReloadFinishSound;
+	class USoundCue* ReloadFinishSound;
 
 
 	UPROPERTY(EditDefaultsOnly, Category = Config)
 		/** Reload Finish Sound for weapon */
-	USoundCue* EmptySound;
+	class USoundCue* EmptySound;
 
 	FORCEINLINE class USkeletalMeshComponent *GetMesh() const { return Mesh; }
 	
