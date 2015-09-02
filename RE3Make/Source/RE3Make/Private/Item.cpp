@@ -12,6 +12,9 @@ AItem::AItem(const FObjectInitializer& ObjectInitializer)
 	CollisionComp = ObjectInitializer.CreateDefaultSubobject<UBoxComponent>(this, TEXT("CollisionComp"));
 	RootComponent = CollisionComp;
 
+	ItemFlash = ObjectInitializer.CreateDefaultSubobject<UParticleSystemComponent>(this, TEXT("ItemFlash"));
+	ItemFlash->AttachTo(RootComponent);
+
 }
 
 // Called when the game starts or when spawned

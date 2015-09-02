@@ -3,6 +3,7 @@
 #pragma once
 
 #include "GameFramework/Actor.h"
+#include "ParticleDefinitions.h"
 #include "Item.generated.h"
 
 UENUM(BlueprintType)
@@ -36,6 +37,9 @@ class RE3MAKE_API AItem : public AActor
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Collision, meta = (AllowPrivateAccess = "true"))
 	class UBoxComponent *CollisionComp;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Particle, meta = (AllowPrivateAccess = "true"))
+	class UParticleSystemComponent *ItemFlash;
 	
 public:	
 	// Sets default values for this actor's properties
@@ -58,5 +62,6 @@ public:
 	virtual void Drop();
 
 	FORCEINLINE class UBoxComponent *GetCollisionComp() const { return CollisionComp; }
+	FORCEINLINE class UParticleSystemComponent *GetItemFlash() const { return ItemFlash; }
 	
 };

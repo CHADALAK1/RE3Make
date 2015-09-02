@@ -66,7 +66,7 @@ void ARE3MakeCharacter::Action()
 {
 	if (bCanPickup)
 	{
-		for (int32 i = 0; i < InventoryArray.Num(); i++)
+		/*for (int32 i = 0; i < InventoryArray.Num(); i++)
 		{
 			if (InventoryArray[i] == NULL)
 			{
@@ -75,6 +75,9 @@ void ARE3MakeCharacter::Action()
 				break;
 			}
 		}
+		*/
+
+		bIsPickingUp = true;
 	}
 }
 
