@@ -35,6 +35,7 @@ void AItem::Pickup()
 {
 	SetActorHiddenInGame(true);
 	GetCollisionComp()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	GetItemFlash()->Deactivate();
 }
 
 void AItem::Drop()
