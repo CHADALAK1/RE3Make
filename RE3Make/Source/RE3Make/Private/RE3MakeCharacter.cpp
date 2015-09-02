@@ -123,7 +123,7 @@ void ARE3MakeCharacter::LookUpAtRate(float Rate)
 
 void ARE3MakeCharacter::MoveForward(float Value)
 {
-	if ((Controller != NULL) && (Value != 0.0f) && (!bIsAiming))
+	if ((Controller != NULL) && (Value != 0.0f) && (!bIsAiming) && (!bIsPickingUp))
 	{
 		// find out which way is forward
 		const FRotator Rotation = Controller->GetControlRotation();
