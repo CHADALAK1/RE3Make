@@ -58,7 +58,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = ItemType)
 	TEnumAsByte<EItemType> TypeItem;
 
+	UFUNCTION(BlueprintCallable, Category = Item)
 	virtual void Pickup();
+
 	virtual void Drop();
 
 	FORCEINLINE class UBoxComponent *GetCollisionComp() const { return CollisionComp; }

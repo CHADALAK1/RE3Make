@@ -66,17 +66,6 @@ void ARE3MakeCharacter::Action()
 {
 	if (bCanPickup)
 	{
-		/*for (int32 i = 0; i < InventoryArray.Num(); i++)
-		{
-			if (InventoryArray[i] == NULL)
-			{
-				InventoryArray[i] = CollidedItem;
-				CollidedItem->Pickup();
-				break;
-			}
-		}
-		*/
-
 		bIsPickingUp = true;
 	}
 }
