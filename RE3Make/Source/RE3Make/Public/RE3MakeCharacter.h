@@ -30,11 +30,17 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Inventory)
 	AItem *CollidedItem;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Inventory)
-	AWeapon *CurrentWeapon;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Inventory)
+	AItem *CurrentWeapon;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Animation)
 	bool bIsPickingUp;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Health)
+	int32 Health;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Health)
+	bool bIsPoisoned;
 
 protected:
 

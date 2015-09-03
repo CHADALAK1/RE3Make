@@ -6,6 +6,8 @@
 #include "ParticleDefinitions.h"
 #include "Item.generated.h"
 
+class ARE3MakeCharacter;
+
 UENUM(BlueprintType)
 enum EItemType
 {
@@ -64,13 +66,27 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = ItemType)
 	TEnumAsByte<EItemType> TypeItem;
 
+	/** SetOwningPawn Function
+	* Retrieves owner for this weapon
+	* @param NewOwner  Only allows RE3MakeCharacter Class type
+	*/
+	UFUNCTION(BlueprintCallable, Category = Owner)
+	virtual void SetOwningPawn(ARE3MakeCharacter *NewOwner);
+
 	UFUNCTION(BlueprintCallable, Category = Item)
 	virtual void Pickup();
 
 	UFUNCTION(BlueprintCallable, Category = Item)
 	virtual void Use();
 
+	UFUNCTION(BlueprintCallable, Category = Item)
+	virtual void Action(){}
+
 	virtual void Drop();
+
+	/** a pointer instance to store the Character class (PART OF THE FORWARD DECLARATOR) */
+	UPROPERTY(VisibleAnyWhere, BlueprintReadOnly, Category = Owner)
+	ARE3MakeCharacter *MyPawn;
 
 	FORCEINLINE class UBoxComponent *GetCollisionComp() const { return CollisionComp; }
 	FORCEINLINE class UParticleSystemComponent *GetItemFlash() const { return ItemFlash; }

@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "RE3Make.h"
+#include "RE3MakeCharacter.h"
 #include "Item.h"
 
 
@@ -36,6 +37,17 @@ void AItem::Pickup()
 	SetActorHiddenInGame(true);
 	GetCollisionComp()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	GetItemFlash()->Deactivate();
+}
+
+void AItem::SetOwningPawn(ARE3MakeCharacter *NewOwner)
+{
+	//if MyPawn does not equal argument parameter
+	if (MyPawn != NewOwner)
+	{
+		//make the player the new owner
+		Instigator = NewOwner;
+		MyPawn = NewOwner;
+	}
 }
 
 void AItem::Use()
