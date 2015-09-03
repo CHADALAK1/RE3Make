@@ -24,10 +24,16 @@ struct FItemStruct
 	/** Splash art for the UI */
 	UTexture2D* SplashArt;
 
-
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Config)
 		/** Name of the weapon */
 	FString Name;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Config)
+	FString Info;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Config)
+		/** Name of the weapon */
+	bool bIsWeapon;
 };
 
 UCLASS()
@@ -60,6 +66,9 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = Item)
 	virtual void Pickup();
+
+	UFUNCTION(BlueprintCallable, Category = Item)
+	virtual void Use();
 
 	virtual void Drop();
 

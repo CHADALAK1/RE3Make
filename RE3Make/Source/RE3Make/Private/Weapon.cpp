@@ -10,4 +10,13 @@ AWeapon::AWeapon(const FObjectInitializer& ObjectInitializer)
 	Mesh->AttachTo(RootComponent);
 }
 
+void AWeapon::Use()
+{
+	Super::Use();
+	if (ItemStruct.bIsWeapon)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 2.f, FColor::Black, "Used Item From Weapon");
+	}
+}
+
 

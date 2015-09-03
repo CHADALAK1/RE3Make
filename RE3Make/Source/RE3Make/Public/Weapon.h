@@ -89,7 +89,6 @@ public:
 		/** Projectile Type Enum Object */
 	TEnumAsByte<EProjectile::Type> ProjType;
 
-
 	UPROPERTY(EditDefaultsOnly, Category = Config)
 		/** Fire Sound for weapon */
 	class USoundCue* FireSound;
@@ -98,15 +97,17 @@ public:
 		/** Reload Start Sound for weapon */
 	class USoundCue* ReloadStartSound;
 
-
 	UPROPERTY(EditDefaultsOnly, Category = Config)
 		/** Reload Finish Sound for weapon */
 	class USoundCue* ReloadFinishSound;
 
-
 	UPROPERTY(EditDefaultsOnly, Category = Config)
 		/** Reload Finish Sound for weapon */
 	class USoundCue* EmptySound;
+
+
+	virtual void Use() override;
+
 
 	FORCEINLINE class USkeletalMeshComponent *GetMesh() const { return Mesh; }
 	

@@ -38,6 +38,11 @@ void AItem::Pickup()
 	GetItemFlash()->Deactivate();
 }
 
+void AItem::Use()
+{
+
+}
+
 void AItem::Drop()
 {
 	SetActorHiddenInGame(false);
