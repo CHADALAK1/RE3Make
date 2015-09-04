@@ -50,11 +50,6 @@ void AItem::SetOwningPawn(ARE3MakeCharacter *NewOwner)
 	}
 }
 
-void AItem::Use()
-{
-
-}
-
 void AItem::Drop()
 {
 	SetActorHiddenInGame(false);

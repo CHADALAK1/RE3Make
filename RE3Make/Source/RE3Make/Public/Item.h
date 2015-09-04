@@ -23,18 +23,19 @@ struct FItemStruct
 	GENERATED_USTRUCT_BODY()
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Config)
-	/** Splash art for the UI */
+		/** Splash art for the UI */
 	UTexture2D* SplashArt;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Config)
-		/** Name of the weapon */
+		/** Name of the Item */
 	FString Name;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Config)
+		/** Holds the info about the Item*/
 	FString Info;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Config)
-		/** Name of the weapon */
+		/** Checks to see if the item is a weapon */
 	bool bIsWeapon;
 };
 
@@ -44,9 +45,11 @@ class RE3MAKE_API AItem : public AActor
 	GENERATED_BODY()
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Collision, meta = (AllowPrivateAccess = "true"))
+		/** The collision Box Component to pickup or interact with*/
 	class UBoxComponent *CollisionComp;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Particle, meta = (AllowPrivateAccess = "true"))
+		/** Particle Flash to tell player this is a item that can be picked up*/
 	class UParticleSystemComponent *ItemFlash;
 	
 public:	
@@ -54,7 +57,7 @@ public:
 	AItem(const FObjectInitializer& ObjectInitializer);
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Config)
-		/** Weapon Configuration Struct object */
+		/** Item Configuration Struct object */
 	FItemStruct ItemStruct;
 
 	// Called when the game starts or when spawned
@@ -77,7 +80,7 @@ public:
 	virtual void Pickup();
 
 	UFUNCTION(BlueprintCallable, Category = Item)
-	virtual void Use();
+	virtual void Use(){}
 
 	UFUNCTION(BlueprintCallable, Category = Item)
 	virtual void Action(){}

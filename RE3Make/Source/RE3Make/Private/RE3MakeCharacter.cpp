@@ -68,6 +68,10 @@ void ARE3MakeCharacter::Action()
 	{
 		bIsPickingUp = true;
 	}
+	if (bIsAiming && CurrentWeapon != NULL)
+	{
+		CurrentWeapon->Action();
+	}
 }
 
 void ARE3MakeCharacter::Aim()

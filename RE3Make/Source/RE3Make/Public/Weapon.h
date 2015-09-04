@@ -17,6 +17,7 @@ namespace EProjectile
 	enum Type
 	{
 		E_Bullet			UMETA(DisplayName = "Bullet"),
+		E_Spread			UMETA(DisplayName = "Spread"),
 		E_Projectile		UMETA(DisplayName = "Projectile"),
 		E_Melee				UMETA(DisplayName = "Melee"),
 	};
@@ -51,6 +52,11 @@ struct FWeaponConfig
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Config)
 		/** Spread of the weapon for each shot */
 	float WeaponSpread;
+
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Config)
+		/** Spread of the weapon for each shot */
+	int32 SpreadAmount;
 
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Config)
@@ -136,6 +142,13 @@ public:
 	* Turns on Collision Damage from Weapon (WIP)
 	*/
 	virtual void MeleeFire();
+
+	/** virtual SpreadFire function
+	* Reason for virtual is if the spead fire has different disciplines
+	* Fires Multiple line traces at once
+	*/
+
+	virtual void SpreadFire();
 
 	/** Attaches weapon to player */
 	void AttachtoPlayer();

@@ -44,6 +44,9 @@ void AWeapon::Fire()
 	case EProjectile::E_Bullet:
 		Instant_Fire();
 		break;
+	case EProjectile::E_Spread:
+		SpreadFire();
+		break;
 	case EProjectile::E_Projectile:
 		ProjectileFire();
 		break;
@@ -130,6 +133,7 @@ void AWeapon::Instant_Fire()
 			CurrentClip -= WeapConfig.ShotCost;
 			PlayWeaponSound(FireSound);
 
+			GEngine->AddOnScreenDebugMessage(-1, 2.f, FColor::Red, "FIRE");
 			//GetWorldTimerManager().SetTimer(this, &AWeapon::Instant_Fire, WeapConfig.TimeBetweenShots, false);
 		}
 		else
@@ -138,6 +142,18 @@ void AWeapon::Instant_Fire()
 		}
 	}
 }
+
+void AWeapon::SpreadFire()
+{
+	if (WeapConfig.SpreadAmount > 0)
+	{
+		for (int32 i = 0; i <= WeapConfig.SpreadAmount; i++)
+		{
+			Instant_Fire();
+		}
+	}
+}
+
 FHitResult AWeapon::WeaponTrace(const FVector &TraceFrom, const FVector &TraceTo) const
 {
 	static FName WeaponFireTag = FName(TEXT("WeaponTrace"));
@@ -160,6 +176,7 @@ void AWeapon::ProcessInstantHit(const FHitResult &Impact, const FVector &Origin,
 	{
 		const FVector EndTrace = Origin + ShootDir * WeapConfig.WeaponRange;
 		const FVector EndPoint = Impact.GetActor() ? Impact.ImpactPoint : EndTrace;
+		DrawDebugLine(GetWorld(), Origin, EndTrace, FColor::Black, true, 10.f);
 	}
 }
 
