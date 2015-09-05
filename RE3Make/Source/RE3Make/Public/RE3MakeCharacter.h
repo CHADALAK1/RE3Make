@@ -5,6 +5,28 @@
 #include "Weapon.h"
 #include "RE3MakeCharacter.generated.h"
 
+USTRUCT(BlueprintType)
+struct FAnimBools
+{
+	GENERATED_USTRUCT_BODY()
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Animation)
+	bool bIsFiring;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Animation)
+	bool bIsReloading;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Animation)
+	int32 FireCount;
+
+	FAnimBools()
+	{
+		bIsFiring = false;
+		bIsReloading = false;
+		FireCount = 0;
+	}
+};
+
 UCLASS(config=Game)
 class ARE3MakeCharacter : public ACharacter
 {
@@ -23,6 +45,9 @@ public:
 	/** Base look up/down rate, in deg/sec. Other scaling may affect final rate. */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera)
 	float BaseLookUpRate;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Animation)
+	FAnimBools AnimBools;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Inventory)
 	TArray<AItem*> InventoryArray;

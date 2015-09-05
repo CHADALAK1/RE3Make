@@ -114,6 +114,15 @@ public:
 		/** Reload Finish Sound for weapon */
 	class USoundCue* EmptySound;
 
+	UPROPERTY(EditDefaultsOnly, Category = Config)
+	class UParticleSystem *MuzzleFlash;
+
+	UPROPERTY(EditDefaultsOnly, Category = Config)
+	class UParticleSystem *TrailFX;
+
+	UPROPERTY(EditDefaultsOnly, Category = Config)
+	class UForceFeedbackEffect *Rumble;
+
 	UFUNCTION(BlueprintCallable, Category = Firing)
 		/** Fires Weapon and checks ProjType Enum to decide Projectile type */
 	void Fire();
@@ -179,6 +188,15 @@ public:
 	* @return  Returns the Weapon Sound to be played
 	*/
 	UAudioComponent* PlayWeaponSound(USoundCue *Sound);
+
+	void PlayControllerRumbleEffect(UForceFeedbackEffect *RumbleAmount);
+
+	void SpawnMuzzleFlash(UParticleSystem* MF);
+
+	/** Spawns the trail Effects for the weapon(INSTANT ONLY)
+	* @param EndPoint  Where the trail FX will end
+	*/
+	void SpawnTrailEffect(const FVector& EndPoint);
 
 	virtual void Use() override;
 

@@ -70,7 +70,12 @@ void ARE3MakeCharacter::Action()
 	}
 	if (bIsAiming && CurrentWeapon != NULL)
 	{
-		CurrentWeapon->Action();
+		AnimBools.bIsFiring = true;
+		AnimBools.FireCount++;
+		if (AnimBools.bIsFiring && AnimBools.FireCount == 1)
+		{
+			CurrentWeapon->Action();
+		}
 	}
 }
 
@@ -127,7 +132,7 @@ void ARE3MakeCharacter::LookUpAtRate(float Rate)
 
 void ARE3MakeCharacter::MoveForward(float Value)
 {
-	if ((Controller != NULL) && (Value != 0.0f) && (!bIsAiming) && (!bIsPickingUp))
+	if ((Controller != NULL) && (Value != 0.0f) && (!bIsAiming) && (!bIsPickingUp) && (!AnimBools.bIsFiring))
 	{
 		// find out which way is forward
 		const FRotator Rotation = Controller->GetControlRotation();

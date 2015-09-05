@@ -46,6 +46,7 @@ void AWeapon::Fire()
 		break;
 	case EProjectile::E_Spread:
 		SpreadFire();
+		PlayControllerRumbleEffect(Rumble);
 		break;
 	case EProjectile::E_Projectile:
 		ProjectileFire();
@@ -55,6 +56,7 @@ void AWeapon::Fire()
 	default:
 		break;
 	}
+	SpawnMuzzleFlash(MuzzleFlash);
 }
 
 void AWeapon::StopFire()
@@ -199,6 +201,39 @@ UAudioComponent* AWeapon::PlayWeaponSound(USoundCue *Sound)
 		AC = UGameplayStatics::SpawnSoundAttached(Sound, MyPawn->GetRootComponent(), FName("NAME_None"), FVector(), EAttachLocation::SnapToTarget, false, 1.0f, this->GetActorTimeDilation(), 0.0f, NULL);
 	}
 	return AC;
+}
+
+void AWeapon::SpawnTrailEffect(const FVector& EndPoint)
+{
+	if (TrailFX)
+	{
+		const FVector Origin = Mesh->GetSocketLocation("Muzzle");
+
+		UParticleSystemComponent *TrailPSC = UGameplayStatics::SpawnEmitterAtLocation(this, TrailFX, Origin);
+		if (TrailPSC)
+		{
+			TrailPSC->SetVectorParameter(FName("ShockBeamEnd"), EndPoint);
+		}
+	}
+}
+
+void AWeapon::PlayControllerRumbleEffect(UForceFeedbackEffect *RumbleAmount)
+{
+	if (Rumble)
+	{
+		APlayerController *Controller = GEngine->GetFirstLocalPlayerController(GetWorld());
+		Controller->ClientPlayForceFeedback(RumbleAmount, false, "Rumble");
+	}
+}
+
+void AWeapon::SpawnMuzzleFlash(UParticleSystem *MF)
+{
+	if (MF)
+	{
+		const FVector MFSocketLoc = GetMesh()->GetSocketLocation("Muzzle");
+		const FRotator MFSocketRot = GetMesh()->GetSocketRotation("Muzzle");
+		UParticleSystemComponent *Flash = UGameplayStatics::SpawnEmitterAtLocation(this, MF, MFSocketLoc, MFSocketRot);
+	}
 }
 
 
