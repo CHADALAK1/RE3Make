@@ -79,7 +79,11 @@ protected:
 	bool bCanPickup;
 
 	/** Checks to see if the player is aiming*/
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Config)
 	bool bIsAiming;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = AimAxis)
+	float AimFloat;
 
 	/** 
 	 * Called via input to turn at a given rate. 

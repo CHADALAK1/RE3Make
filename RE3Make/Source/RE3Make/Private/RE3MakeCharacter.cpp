@@ -127,13 +127,17 @@ void ARE3MakeCharacter::TurnAtRate(float Rate)
 void ARE3MakeCharacter::LookUpAtRate(float Rate)
 {
 	// calculate delta for this frame from the rate information
-	AddControllerPitchInput(Rate * BaseLookUpRate * GetWorld()->GetDeltaSeconds());
+	if (bIsAiming)
+	{
+		AddControllerPitchInput(Rate * BaseLookUpRate * GetWorld()->GetDeltaSeconds());
+	}
 }
 
 void ARE3MakeCharacter::MoveForward(float Value)
 {
 	if ((Controller != NULL) && (Value != 0.0f) && (!bIsAiming) && (!bIsPickingUp) && (!AnimBools.bIsFiring))
 	{
+		AimFloat = 0.f;
 		// find out which way is forward
 		const FRotator Rotation = Controller->GetControlRotation();
 		const FRotator YawRotation(0, Rotation.Yaw, 0);
@@ -141,6 +145,10 @@ void ARE3MakeCharacter::MoveForward(float Value)
 		// get forward vector
 		const FVector Direction = FRotationMatrix(Rotation).GetUnitAxis(EAxis::X);
 		AddMovementInput(Direction, Value);
+	}
+	if (bIsAiming)
+	{
+		AimFloat += (Value * BaseLookUpRate * GetWorld()->GetDeltaSeconds());
 	}
 }
 
